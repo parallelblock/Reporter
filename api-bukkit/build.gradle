@@ -1,0 +1,4 @@
+dependencies {
+    compileOnly project(":bukkit-common")
+    compile project(":reporter-api")
+}

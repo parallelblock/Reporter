@@ -1,0 +1,26 @@
+// This file contains special build instructions specifically for the ParallelBlock CI in order to instruct it how to
+// build the project. Usually, this shouldn't be interacted with by a human.
+
+configure([project(":reporter-api"), project(":reporter-api-bukkit"), project(":reporter-api-bungeecord")]) {
+    apply plugin: "maven-publish"
+    publishing {
+        repositories {
+            maven {
+                name 'parallelBlock'
+                if (project.version.endsWith("-SNAPSHOT"))
+                    url "$System.env.SNAPSHOT_REPO"
+                else
+                    url "$System.env.RELEASE_REPO"
+                credentials {
+                    username "$System.env.REPO_USERNAME"
+                    password "$System.env.REPO_PASSWORD"
+                }
+            }
+        }
+        publications {
+            api(MavenPublication) {
+                from components.java
+            }
+        }
+    }
+}

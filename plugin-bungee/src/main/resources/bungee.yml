@@ -1,0 +1,4 @@
+name: Reporter
+main: com.parallelblock.reporter.plugin.bungee.ReporterPlugin
+version: gradle-version-number
+author: ParallelBlock LLC

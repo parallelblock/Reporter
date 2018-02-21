@@ -1,0 +1,13 @@
+pipeline:
+  build:
+    image: gradle:latest
+    commands: gradle build shadowJar
+  publish:
+    image: gradle:latest
+    commands: gradle
+    environment:
+      - PUBLISH=yes
+    secrets: [SNAPSHOT_REPO, RELEASE_REPO, REPO_USERNAME, REPO_PASSWORD]
+    when:
+      branch: master
+      event: push
