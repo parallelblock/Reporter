@@ -1,10 +1,10 @@
 pipeline:
   build:
-    image: gradle:latest
-    commands: gradle build shadowJar
+    image: cogniteev/oracle-java
+    commands: ./gradlew build shadowJar --no-daemon
   publish:
-    image: gradle:latest
-    commands: gradle
+    image: cogniteev/oracle-java
+    commands: ./gradlew publishApiPublicationToParallelBlockRepository --no-daemon
     environment:
       - PUBLISH=yes
     secrets: [SNAPSHOT_REPO, RELEASE_REPO, REPO_USERNAME, REPO_PASSWORD]
